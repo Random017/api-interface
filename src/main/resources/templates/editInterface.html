@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>编辑接口</title>
+    <style>
+        input {
+            width: 600px;
+        }
+
+        textarea {
+            width: 600px;
+            height: 100px;
+
+        }
+
+        .t1 {
+            width: 150px;
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 80%;margin-left: 10%;margin-right: 10%">
+    <a href="/interface/findAllInterface">首页</a>
+    <span id="usernameSpan" style="margin-right: 100px;color: blue"></span>
+    <script>
+        window.onload = function (ev) {
+            var item = localStorage.getItem("username");
+            document.getElementById("usernameSpan").innerHTML = item;
+        }
+    </script>
+</div>
+<div style="width: 50%;margin-right: 25%;margin-left: 25%;text-align: center">
+    <h1 th:text="'编辑：'+${interfaceDetail.name}">接口名称</h1>
+    <div>
+        <form action="/interface/editInterface" method="post">
+            <input type="hidden" name="id" th:value="${interfaceDetail.id}"/>
+            <table border="0" style="text-align: left">
+                <tr>
+                    <td class="t1">接口名:</td>
+                    <td>
+                        <input type="text" name="name" th:value="${interfaceDetail.name}" placeholder="200字符以内"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="t1">接口描述:</td>
+                    <td><input type="text" name="description" th:value="${interfaceDetail.description}"
+                               placeholder="500字符以内"/></td>
+                </tr>
+                <tr>
+                    <td class="t1">请求URI:</td>
+                    <td><input type="text" name="address" th:value="${interfaceDetail.address}"
+                               placeholder="/example/api/getSome"/></td>
+                </tr>
+                <tr>
+                    <td class="t1">请求方法:</td>
+                    <td><span type="text" name="method" th:text="${interfaceDetail.method}"></span></td>
+                </tr>
+                <tr>
+                    <td class="t1">请求content-type:</td>
+                    <td><span type="text" name="requestContentType" th:text="${interfaceDetail.requestContentType}"></span></td>
+                </tr>
+                <tr>
+                    <td class="t1">请求参数:</td>
+                    <td><textarea name="requestParams" th:text="${interfaceDetail.requestParams}"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="t1">请求备注:</td>
+                    <td><textarea name="requestRemark" th:text="${interfaceDetail.requestRemark}"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="t1">响应content-type:</td>
+                    <td><span name="responseContentType"  type="text" th:text="${interfaceDetail.responseContentType}"></span></td>
+                </tr>
+                <tr>
+                    <td class="t1">响应内容:</td>
+                    <td><textarea name="responseContent"  th:text="${interfaceDetail.responseContent}"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="t1">响应备注:</td>
+                    <td><textarea name="responseRemark" th:text="${interfaceDetail.responseRemark}"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="t1">创建人:</td>
+                    <td><span th:text="${interfaceDetail.createBy}"></span></td>
+                </tr>
+                <tr>
+                    <td class="t1">修改人:</td>
+                    <td><span th:text="${interfaceDetail.updateBy}"></span></td>
+                </tr>
+                <tr>
+                    <td class="t1">创建时间:</td>
+                    <td><span th:text="${#dates.format(interfaceDetail.createTime,'yyyy-MM-dd HH:mm:ss')}"></span></td>
+                </tr>
+                <tr>
+                    <td class="t1">最后更新时间:</td>
+                    <td><span th:text="${#dates.format(interfaceDetail.updateTime,'yyyy-MM-dd HH:mm:ss')}"></span></td>
+                </tr>
+            </table>
+            <input type="submit" value="提交更改"/><br/><br/>
+            <span style="color: red" th:text="${tip}">提示</span>
+        </form>
+    </div>
+</div>
+</body>
+</html>

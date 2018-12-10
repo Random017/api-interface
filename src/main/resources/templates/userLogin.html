@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>登录</title>
+    <style>
+        input {
+            display: block;
+            margin: auto;
+            width: 250px;
+            line-height: 26px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 50%;margin-right: 25%;margin-left: 25%;text-align: center">
+    <h1>登录API 服务</h1>
+    <br/>
+    <div>
+        <form action="/user/login" method="post">
+            <input type="text" name="username" placeholder="请输入用户名"/> <br/>
+            <input type="password" name="password" placeholder="请输入密码"/><br/><br/>
+            <input type="submit" value="登入"/><br/>
+            <span style="color: red" th:text="${tip}">提示</span>
+            <br/>
+            <br/>
+            <br/>
+        </form>
+        <hr/>
+        <a href="/userRegister">还没有账号,去注册</a>
+    </div>
+</div>
+</body>
+</html>

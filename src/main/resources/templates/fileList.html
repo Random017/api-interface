@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>文件列表</title>
+    <style>
+        input {
+            width: 600px;
+        }
+
+        textarea {
+            width: 600px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 80%;margin-left: 10%;margin-right: 10%">
+    <a href="/interface/findAllInterface">首页</a>
+    <span id="usernameSpan" style="margin-right: 100px;color: blue"></span>
+    <script>
+        window.onload = function (ev) {
+            var item = localStorage.getItem("username");
+            document.getElementById("usernameSpan").innerHTML = item;
+        }
+    </script>
+</div>
+<div style="width: 80%;margin-left: 20%;text-align:left">
+    <h1>文件列表</h1>
+    <div th:unless="${#lists.isEmpty(fileList)}" th:each="file,infoStat : ${fileList}">
+        <img th:src="@{${file}}" width="100" height="75" alt="FILE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+        <div style="vertical-align: middle;
+    width: 800px;
+    display: inline-block;
+    height: 75px;">
+            <a th:text="${file}" th:href="@{${file}}" style="height: 75px;margin-top: 30px"></a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

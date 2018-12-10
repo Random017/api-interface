@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>搜索结果</title>
+    <style>
+        .t1 {
+            display: inline-block;
+            width: 250px;
+        }
+        tr{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 80%;margin-left: 10%;margin-right: 10%">
+    <a href="/interface/findAllInterface">首页</a>
+    <span id="usernameSpan" style="margin-right: 100px;color: blue"></span>
+    <script>
+        window.onload = function (ev) {
+            var item = localStorage.getItem("username");
+            document.getElementById("usernameSpan").innerHTML = item;
+        }
+    </script>
+</div>
+<div style="width: 80%;margin-right: 10%;margin-left: 10%;text-align: center">
+    <h1>搜索结果</h1>
+    <form action="/interface/search">
+        <input style="width: 200px" type="text" placeholder="搜素接口名称或接口URI" name="keyword"/>
+        <input type="submit" value="搜索"/>
+    </form>
+    <br/><br/>
+    <table border="0">
+        <tr>
+            <th>接口名称</th>
+            <th>接口URI</th>
+        </tr>
+        <tr th:if="${#lists.isEmpty(interfaceList)}">
+            <td>
+                没有搜索到数据
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr th:unless="${#lists.isEmpty(interfaceList)}" th:each="info,infoStat : ${interfaceList}">
+            <td class="t1">
+                <a th:text="${info.name}" th:href="@{'/interface/view/'+${info.id}}"></a>
+            </td>
+            <td th:text="${info.address}"></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

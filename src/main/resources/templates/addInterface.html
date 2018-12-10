@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>新增API 接口</title>
+    <style>
+        input {
+            width: 600px;
+        }
+
+        textarea {
+            width: 600px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 80%;margin-left: 10%;margin-right: 10%">
+    <a href="/interface/findAllInterface">首页</a>
+    <span id="usernameSpan" style="margin-right: 100px;color: blue"></span>
+    <script>
+        window.onload = function (ev) {
+            var item = localStorage.getItem("username");
+            document.getElementById("usernameSpan").innerHTML = item;
+        }
+    </script>
+</div>
+<div style="width: 50%;margin-right: 25%;margin-left: 25%;text-align: center">
+    <h1>新增API 接口</h1>
+    <div>
+        <form action="/interface/add" method="post">
+            <table border="0" style="text-align: left">
+                <tr>
+                    <td>接口名:</td>
+                    <td><input type="text" name="name" placeholder="200字符以内"/></td>
+                </tr>
+                <tr>
+                    <td>接口描述:</td>
+                    <td><input type="text" name="description" placeholder="500字符以内"/></td>
+                </tr>
+                <tr>
+                    <td>请求URI:</td>
+                    <td><input type="text" name="address" placeholder="/example/api/getSome"/></td>
+                </tr>
+                <tr>
+                    <td>请求方法:</td>
+                    <td>
+                        <select name="method" style="width: 600px;">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="DELETE">DELETE</option>
+                            <option value="PUT">PUT</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>请求content-type:</td>
+                    <td>
+                        <select name="requestContentType" style="width: 600px;">
+                            <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                            <option value="multipart/form-data">multipart/form-data</option>
+                            <option value="application/json">application/json</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>请求参数:</td>
+                    <td><textarea name="requestParams" placeholder="5000字符以内"></textarea></td>
+                </tr>
+                <tr>
+                    <td>请求备注:</td>
+                    <td><textarea name="requestRemark" placeholder="200字符以内"></textarea></td>
+                </tr>
+                <tr>
+                    <td>响应content-type:</td>
+                    <td>
+                        <select name="responseContentType" style="width: 600px;">
+                            <option value="text/html">text/html</option>
+                            <option value="application/json">application/json</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>响应内容:</td>
+                    <td><textarea name="responseContent" placeholder="5000字符以内"></textarea></td>
+                </tr>
+                <tr>
+                    <td>响应备注:</td>
+                    <td><textarea name="responseRemark" placeholder="200字符以内"></textarea></td>
+                </tr>
+
+            </table>
+            <input type="submit" value="提交新增接口"/><br/><br/>
+            <span style="color: red" th:text="${tip}">提示</span>
+        </form>
+        <hr/>
+        <a href="/interface/findAllInterface">Go Home</a>
+    </div>
+</div>
+</body>
+</html>
