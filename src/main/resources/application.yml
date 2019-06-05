@@ -1,0 +1,64 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: api-interface
+  resources:
+    static-locations: file:${disk-save-path}
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 512MB
+      max-request-size: 516MB
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+---
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/local_test?useSSL=false&characterEncoding=UTF8&autoReconnect=true&connectTimeout=3000&socketTimeout=60000
+    username: root
+    password: root
+  thymeleaf:
+    cache: false
+server:
+  port: 10200
+logging:
+  level:
+    com:
+      skycong:
+        file:
+          dao:
+            mapper: debug
+  path: C:\\test\\log\\${spring.application.name}
+
+disk-save-path: C:\\test\\upload
+domain: http://localhost:${server.port}
+
+---
+spring:
+  profiles:
+    active: test
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/local_test?useSSL=false&characterEncoding=UTF8&autoReconnect=true&connectTimeout=3000&socketTimeout=60000
+    username: root
+    password: root
+  thymeleaf:
+    cache: false
+server:
+  port: 9083
+logging:
+  level:
+    com:
+      skycong:
+        file:
+          dao:
+            mapper: debug
+  path: /data/log/${spring.application.name}
+
+disk-save-path: /data/upload
+domain: http://localhost:${server.port}
